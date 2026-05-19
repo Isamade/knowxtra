@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@200..800&display=swap');
+
+:root {
+  /* Brand Colors - Pristine Light Theme */
+  --primary-navy: #0F172A;
+  --accent-gold: #D4AF37;
+  --accent-gold-hover: #F1C40F;
+  --accent-pastel-blue: #E0F2FE;
+  --accent-pastel-gold: #FEF3C7;
+
+  /* Neutral Colors */
+  --bg-light: #F8FAFC;
+  --bg-secondary: #FFFFFF;
+  --surface-light: rgba(255, 255, 255, 0.7);
+  --text-main: #334155;
+  --text-heading: #0F172A;
+  --text-muted: #64748B;
+  --border-color: rgba(15, 23, 42, 0.08);
+
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 2rem;
+  --spacing-lg: 4rem;
+  --spacing-xl: 8rem;
+
+  /* Fonts */
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  
+  /* Transitions */
+  --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset and base styles */
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--bg-light);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Base mesh backgrounds for the pristine light theme with vibrant gradient colour effect */
+.pristine-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #E0F2FE 0%, #F8FAFC 50%, #FEF3C7 100%);
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Pronounced Grain Background over the colorful gradient */
+.subtle-grain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: -1; /* Placed behind content so text remains ultra-sharp and clean */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.15; /* High enough opacity so grain is clearly visible and gorgeous on the gradient */
+}
+
+/* 3D Refined Metallic Text Effect (Stylish & Integrated) */
+.text-3d {
+  background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--text-heading);
+  text-shadow: 1px 2px 4px rgba(15, 23, 42, 0.2);
+}
+
+.text-3d-gold {
+  background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent-gold);
+  text-shadow: 1px 2px 4px rgba(212, 175, 55, 0.3);
+}
+
+/* The Digital Codex Spine */
+.holographic-spine {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background: linear-gradient(to bottom, var(--accent-gold), var(--primary-navy), var(--accent-gold));
+  box-shadow: 4px 0 20px rgba(212, 175, 55, 0.6);
+  z-index: 9999;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 10px 40px 0 rgba(15, 23, 42, 0.03);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-serif);
+  color: var(--text-heading);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-smooth);
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Utilities */
+.container {
+  width: 100%;
+  padding: 0 var(--spacing-sm);
+  margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-md);
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding: 0 var(--spacing-lg);
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--primary-navy);
+}

@@ -1,0 +1,308 @@
+.hero {
+  min-height: calc(100vh - 80px);
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: var(--spacing-xl) 0;
+}
+
+.heroContent {
+  max-width: 900px;
+  position: relative;
+  z-index: 10;
+}
+
+.eyebrow {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 100px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--primary-navy);
+  margin-bottom: var(--spacing-sm);
+}
+
+.heroTitle {
+  font-size: clamp(3rem, 7vw, 6rem);
+  line-height: 1.05;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-heading);
+  letter-spacing: -2px;
+}
+
+.heroTitle span {
+  display: block;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, #B8860B 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.heroSubtitle {
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  color: var(--text-main);
+  max-width: 700px;
+  margin-bottom: var(--spacing-lg);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.glassCard {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  border-radius: 24px;
+  padding: var(--spacing-lg);
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  position: relative;
+}
+
+.glassCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.bentoGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .bentoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .bentoGrid {
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: 1fr;
+  }
+}
+
+.bentoContent {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: flex-start;
+  position: relative;
+  z-index: 2;
+  gap: 1.5rem;
+}
+
+.bentoIconWrapper {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+}
+
+.bentoIcon {
+  color: var(--primary-navy);
+}
+
+.bentoTitle {
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-heading);
+}
+
+.bentoDesc {
+  color: var(--text-main);
+  line-height: 1.6;
+}
+
+.videoSection {
+  margin: var(--spacing-xl) 0;
+  border-radius: 32px;
+  overflow: hidden;
+  position: relative;
+  aspect-ratio: 16/9;
+  background: #000;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.1);
+}
+
+.videoElement {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.videoOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.8), transparent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  color: white;
+  padding: var(--spacing-md);
+}
+
+.videoTitle {
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-family: var(--font-serif);
+  margin-bottom: var(--spacing-sm);
+  color: white;
+}
+
+/* Premium Codex Tab Grid Styles (Plateau Integration) */
+.codexGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  margin-top: var(--spacing-xl);
+  padding-bottom: var(--spacing-xl);
+}
+
+@media (min-width: 992px) {
+  .codexGrid {
+    grid-template-columns: 360px 1fr;
+    align-items: start;
+  }
+}
+
+.codexNav {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.codexTabBtn {
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 24px;
+  padding: 1.5rem;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.02);
+  width: 100%;
+  outline: none;
+}
+
+.codexTabBtn:hover {
+  transform: translateX(6px);
+  background: rgba(255, 255, 255, 0.7);
+  border-color: rgba(15, 23, 42, 0.15);
+}
+
+.activeTab {
+  background: rgba(255, 255, 255, 0.98) !important;
+  border-color: var(--accent-gold) !important;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06) !important;
+  transform: translateX(12px);
+}
+
+.tabBtnContent {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+}
+
+.tabIconWrapper {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-navy);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.activeTab .tabIconWrapper {
+  background: var(--primary-navy);
+  color: white;
+}
+
+.codexDisplay {
+  width: 100%;
+}
+
+.codexCard {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.04);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 768px) {
+  .codexCard {
+    grid-template-columns: 340px 1fr;
+    min-height: 500px;
+  }
+}
+
+.codexCardImageWrapper {
+  position: relative;
+  height: 280px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .codexCardImageWrapper {
+    height: 100%;
+  }
+}
+
+.codexCardImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.codexCard:hover .codexCardImage {
+  transform: scale(1.04);
+}
+
+.codexCardImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.3), transparent);
+}
+
+.codexCardBody {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .codexCardBody {
+    padding: 3.5rem;
+  }
+}
+
