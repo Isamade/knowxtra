@@ -123,15 +123,18 @@ export default function EventsPage() {
                 display: 'flex',
                 flexWrap: 'wrap',
                 transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-                willChange: 'transform, box-shadow'
+                willChange: 'transform, box-shadow',
+                padding: isMobile ? '1.25rem' : '0',
+                gap: isMobile ? '1.25rem' : '0'
               }}
             >
               {/* Cover image panel with zoom effect on hover */}
               <div style={{ 
-                flex: '1 1 320px', 
+                flex: isMobile ? '1 1 100%' : '1 1 320px', 
                 position: 'relative', 
-                minHeight: '280px', 
-                overflow: 'hidden'
+                minHeight: isMobile ? '180px' : '280px', 
+                overflow: 'hidden',
+                borderRadius: isMobile ? '16px' : '0'
               }}>
                 <img 
                   src={event.img.startsWith('http') ? `${event.img}?auto=format&fit=crop&w=800&q=80` : event.img} 
@@ -157,8 +160,8 @@ export default function EventsPage() {
               
               {/* Detailed descriptive text blocks */}
               <div style={{ 
-                flex: '2 1 420px', 
-                padding: '2.5rem', 
+                flex: isMobile ? '1 1 100%' : '2 1 420px', 
+                padding: isMobile ? '0' : '2.5rem', 
                 display: 'flex', 
                 flexDirection: 'column', 
                 gap: '1.25rem',
@@ -169,8 +172,8 @@ export default function EventsPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
                     {/* Calendar Badge */}
                     <div style={{
-                      width: '52px',
-                      height: '56px',
+                      width: isMobile ? '46px' : '52px',
+                      height: isMobile ? '50px' : '56px',
                       borderRadius: '12px',
                       overflow: 'hidden',
                       boxShadow: '0 4px 10px rgba(0,0,0,0.06)',
@@ -181,10 +184,10 @@ export default function EventsPage() {
                       flexDirection: 'column',
                       flexShrink: 0
                     }}>
-                      <div style={{ background: 'var(--primary-navy)', color: 'white', fontSize: '0.7rem', fontWeight: 700, padding: '2px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                      <div style={{ background: 'var(--primary-navy)', color: 'white', fontSize: isMobile ? '0.6rem' : '0.7rem', fontWeight: 700, padding: '2px 0', textTransform: 'uppercase', letterSpacing: '1px' }}>
                         {event.month}
                       </div>
-                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.25rem', fontWeight: 800, color: 'var(--text-heading)', fontFamily: 'var(--font-sans)', lineHeight: 1 }}>
+                      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: isMobile ? '1.1rem' : '1.25rem', fontWeight: 800, color: 'var(--text-heading)', fontFamily: 'var(--font-sans)', lineHeight: 1 }}>
                         {event.day}
                       </div>
                     </div>
@@ -194,7 +197,7 @@ export default function EventsPage() {
                       background: 'rgba(15, 23, 42, 0.05)',
                       color: 'var(--primary-navy)',
                       borderRadius: '100px',
-                      fontSize: '0.8rem',
+                      fontSize: isMobile ? '0.75rem' : '0.8rem',
                       fontWeight: 600,
                       textTransform: 'uppercase',
                       letterSpacing: '0.5px'
@@ -207,19 +210,23 @@ export default function EventsPage() {
                 {/* Title & Excerpt */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                   <h3 style={{ 
-                    fontSize: 'clamp(1.4rem, 2.5vw, 1.8rem)', 
+                    fontSize: isMobile ? '1.25rem' : '1.65rem', 
                     margin: 0, 
                     fontFamily: 'var(--font-serif)', 
                     color: 'var(--text-heading)',
-                    lineHeight: 1.3
+                    lineHeight: 1.3,
+                    display: '-webkit-box',
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: 'vertical',
+                    overflow: 'hidden'
                   }}>
                     {event.title}
                   </h3>
                   <p style={{ 
                     margin: 0, 
-                    fontSize: '0.98rem', 
+                    fontSize: isMobile ? '0.85rem' : '0.98rem', 
                     color: 'var(--text-muted)', 
-                    lineHeight: 1.6,
+                    lineHeight: 1.5,
                     display: '-webkit-box',
                     WebkitLineClamp: 2,
                     WebkitBoxOrient: 'vertical',
@@ -230,7 +237,13 @@ export default function EventsPage() {
                 </div>
 
                 {/* Metadata row */}
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1.5rem', fontSize: '0.9rem', color: 'var(--text-main)' }}>
+                <div style={{ 
+                  display: 'flex', 
+                  flexDirection: isMobile ? 'column' : 'row', 
+                  gap: isMobile ? '0.5rem' : '1.5rem', 
+                  fontSize: isMobile ? '0.82rem' : '0.9rem', 
+                  color: 'var(--text-main)' 
+                }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Clock size={16} style={{ color: 'var(--accent-gold)' }} />
                     <span>{event.time}</span>
@@ -238,7 +251,7 @@ export default function EventsPage() {
                   <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <MapPin size={16} style={{ color: 'var(--accent-gold)' }} />
                     <span style={{ 
-                      maxWidth: '300px', 
+                      maxWidth: isMobile ? '100%' : '300px', 
                       overflow: 'hidden', 
                       textOverflow: 'ellipsis', 
                       whiteSpace: 'nowrap' 
@@ -250,7 +263,7 @@ export default function EventsPage() {
 
                 {/* Seats Remaining Urgency Indicator */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', fontWeight: 600 }}>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: isMobile ? '0.78rem' : '0.85rem', fontWeight: 600 }}>
                     <span style={{ color: 'var(--accent-gold)' }}>
                       Only {event.seatsLeft} seats remaining!
                     </span>
@@ -271,78 +284,163 @@ export default function EventsPage() {
                 {/* Bottom section (Social proof attendees & Price / CTA) */}
                 <div style={{ 
                   display: 'flex', 
-                  alignItems: 'center', 
-                  gap: '0.75rem', 
+                  flexDirection: isMobile ? 'column' : 'row',
+                  alignItems: isMobile ? 'stretch' : 'center', 
+                  gap: isMobile ? '1rem' : '0.75rem', 
                   borderTop: '1px solid rgba(15,23,42,0.08)', 
                   paddingTop: '1rem',
                   marginTop: '0.5rem',
-                  flexWrap: 'wrap'
+                  width: '100%'
                 }}>
-                  {/* Attendee Avatars */}
-                  <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <div style={{ display: 'flex', alignItems: 'center' }}>
-                      {event.attendees.map((avatar, idx) => (
-                        <img 
-                          key={idx}
-                          src={avatar} 
-                          alt="Attendee Profile" 
-                          style={{ 
-                            width: '28px', 
-                            height: '28px', 
-                            borderRadius: '50%', 
-                            border: '2px solid white', 
-                            marginLeft: idx === 0 ? 0 : '-8px',
-                            objectFit: 'cover'
-                          }} 
-                        />
-                      ))}
-                      <div style={{
-                        width: '28px',
-                        height: '28px',
-                        borderRadius: '50%',
-                        background: 'var(--primary-navy)',
-                        color: 'white',
-                        fontSize: '0.7rem',
-                        fontWeight: 700,
+                  {isMobile ? (
+                    // Mobile Layout: Split attendees/pricing on top, unified full-width button below
+                    <>
+                      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
+                        {/* Attendee Avatars */}
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', alignItems: 'center' }}>
+                            {event.attendees.map((avatar, idx) => (
+                              <img 
+                                key={idx}
+                                src={avatar} 
+                                alt="Attendee Profile" 
+                                style={{ 
+                                  width: '28px', 
+                                  height: '28px', 
+                                  borderRadius: '50%', 
+                                  border: '2px solid white', 
+                                  marginLeft: idx === 0 ? 0 : '-8px',
+                                  objectFit: 'cover'
+                                }} 
+                              />
+                            ))}
+                            <div style={{
+                              width: '28px',
+                              height: '28px',
+                              borderRadius: '50%',
+                              background: 'var(--primary-navy)',
+                              color: 'white',
+                              fontSize: '0.7rem',
+                              fontWeight: 700,
+                              display: 'flex',
+                              alignItems: 'center',
+                              justifyContent: 'center',
+                              border: '2px solid white',
+                              marginLeft: '-8px'
+                            }}>
+                              +
+                            </div>
+                          </div>
+                          <span style={{ fontSize: '0.78rem', color: 'var(--text-muted)', marginLeft: '0.5rem', fontWeight: 500 }}>
+                            Joined by <strong>{event.attendeeCount}</strong>
+                          </span>
+                        </div>
+
+                        {/* Price block */}
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: '0.7rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fee</span>
+                          <span style={{ fontSize: '1.05rem', fontWeight: 700, color: 'var(--primary-navy)', whiteSpace: 'nowrap' }}>{event.price}</span>
+                        </div>
+                      </div>
+
+                      <button style={{ 
+                        width: '100%',
+                        padding: '0.7rem 1.5rem', 
+                        background: 'var(--primary-navy)', 
+                        color: 'white', 
+                        border: 'none', 
+                        borderRadius: '100px', 
+                        fontWeight: 600, 
+                        cursor: 'pointer', 
+                        fontFamily: 'var(--font-sans)',
                         display: 'flex',
                         alignItems: 'center',
                         justifyContent: 'center',
-                        border: '2px solid white',
-                        marginLeft: '-8px'
+                        gap: '0.5rem',
+                        fontSize: '0.85rem',
+                        transition: 'background 0.3s',
+                        whiteSpace: 'nowrap'
                       }}>
-                        +
+                        Reserve Seat <ArrowRight size={16} />
+                      </button>
+                    </>
+                  ) : (
+                    // Desktop Layout: Social proof left, Price/CTA right
+                    <>
+                      {/* Attendee Avatars */}
+                      <div style={{ display: 'flex', alignItems: 'center', width: 'auto' }}>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>
+                          {event.attendees.map((avatar, idx) => (
+                            <img 
+                              key={idx}
+                              src={avatar} 
+                              alt="Attendee Profile" 
+                              style={{ 
+                                width: '28px', 
+                                height: '28px', 
+                                borderRadius: '50%', 
+                                border: '2px solid white', 
+                                marginLeft: idx === 0 ? 0 : '-8px',
+                                objectFit: 'cover'
+                              }} 
+                            />
+                          ))}
+                          <div style={{
+                            width: '28px',
+                            height: '28px',
+                            borderRadius: '50%',
+                            background: 'var(--primary-navy)',
+                            color: 'white',
+                            fontSize: '0.7rem',
+                            fontWeight: 700,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            border: '2px solid white',
+                            marginLeft: '-8px'
+                          }}>
+                            +
+                          </div>
+                        </div>
+                        <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginLeft: '0.5rem', fontWeight: 500 }}>
+                          Joined by <strong>{event.attendeeCount}</strong> professionals
+                        </span>
                       </div>
-                    </div>
-                    <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', marginLeft: '0.5rem', fontWeight: 500 }}>
-                      Joined by <strong>{event.attendeeCount}</strong> professionals
-                    </span>
-                  </div>
 
-                  {/* Pricing and Action button aligned right */}
-                  <div style={{ marginLeft: 'auto', display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-                    <div style={{ textAlign: 'right' }}>
-                      <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fee</span>
-                      <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--primary-navy)' }}>{event.price}</span>
-                    </div>
+                      {/* Pricing and Action button aligned right */}
+                      <div style={{ 
+                        marginLeft: 'auto', 
+                        display: 'flex', 
+                        alignItems: 'center', 
+                        gap: '1.5rem',
+                        width: 'auto'
+                      }}>
+                        <div style={{ textAlign: 'right' }}>
+                          <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', display: 'block', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Fee</span>
+                          <span style={{ fontSize: '1.2rem', fontWeight: 700, color: 'var(--primary-navy)', whiteSpace: 'nowrap' }}>{event.price}</span>
+                        </div>
 
-                    <button style={{ 
-                      padding: '0.75rem 1.5rem', 
-                      background: 'var(--primary-navy)', 
-                      color: 'white', 
-                      border: 'none', 
-                      borderRadius: '100px', 
-                      fontWeight: 600, 
-                      cursor: 'pointer', 
-                      fontFamily: 'var(--font-sans)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '0.5rem',
-                      fontSize: '0.9rem',
-                      transition: 'background 0.3s'
-                    }}>
-                      Reserve Seat <ArrowRight size={16} />
-                    </button>
-                  </div>
+                        <button style={{ 
+                          padding: '0.75rem 1.5rem', 
+                          background: 'var(--primary-navy)', 
+                          color: 'white', 
+                          border: 'none', 
+                          borderRadius: '100px', 
+                          fontWeight: 600, 
+                          cursor: 'pointer', 
+                          fontFamily: 'var(--font-sans)',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '0.5rem',
+                          fontSize: '0.9rem',
+                          transition: 'background 0.3s',
+                          whiteSpace: 'nowrap'
+                        }}>
+                          Reserve Seat <ArrowRight size={16} />
+                        </button>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </motion.div>
