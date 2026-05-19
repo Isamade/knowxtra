@@ -104,7 +104,7 @@ export default function Home() {
             variants={staggerContainer}
           >
             <div style={{ maxWidth: '600px', marginBottom: 'var(--spacing-lg)' }}>
-              <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', color: 'var(--text-heading)', marginBottom: '1rem', letterSpacing: '-1px' }}>
+              <motion.h2 variants={fadeUp} style={{ fontSize: 'clamp(1.5rem, 4vw, 2.5rem)', color: 'var(--text-heading)', marginBottom: '1rem', letterSpacing: '-1px' }}>
                 Our Core Activities
               </motion.h2>
               <motion.p variants={fadeUp} style={{ color: 'var(--text-main)', fontSize: '1.1rem' }}>
@@ -224,7 +224,7 @@ function CodexTabGrid() {
             <span style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-gold)' }}>
               KnowXtra Codex Focus
             </span>
-            <h3 style={{ fontSize: '2rem', margin: '0.5rem 0 1rem', fontFamily: 'var(--font-serif)', color: 'var(--text-heading)' }}>
+            <h3 style={{ fontSize: 'clamp(1.4rem, 3vw, 2rem)', margin: '0.5rem 0 1rem', fontFamily: 'var(--font-serif)', color: 'var(--text-heading)' }}>
               {sectors[activeTab].title}
             </h3>
             

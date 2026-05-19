@@ -22,10 +22,26 @@ export default function CartPage() {
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem("knowxtra_cart");
       if (stored) {
-        setCart(JSON.parse(stored));
+        const item = JSON.parse(stored);
+        setCart(item);
+        if (item.quantity) {
+          setQuantity(item.quantity);
+        }
       }
     }
   }, []);
+
+  // Persist quantity modifications
+  useEffect(() => {
+    if (mounted && cart) {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("knowxtra_cart", JSON.stringify({
+          ...cart,
+          quantity: quantity
+        }));
+      }
+    }
+  }, [quantity, mounted, cart]);
 
   const handleClear = () => {
     if (typeof window !== "undefined") {

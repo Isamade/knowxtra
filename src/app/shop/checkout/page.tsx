@@ -11,6 +11,7 @@ interface CartItem {
   price: string;
   rawPrice: number;
   img: string;
+  quantity?: number;
 }
 
 export default function CheckoutPage() {
@@ -129,15 +130,22 @@ export default function CheckoutPage() {
             <h3 style={{ fontSize: '1.5rem', margin: 0, color: 'var(--text-heading)', fontFamily: 'var(--font-serif)' }}>Order Details</h3>
             <div style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
               <img src={`${cart.img}?auto=format&fit=crop&w=150&q=80`} alt={cart.title} style={{ width: '60px', height: '60px', borderRadius: '8px', objectFit: 'cover' }} />
-              <div>
+              <div style={{ flex: 1 }}>
                 <h4 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-heading)', fontFamily: 'var(--font-serif)' }}>{cart.title}</h4>
-                <span style={{ color: 'var(--accent-gold)', fontSize: '0.95rem', fontWeight: 600 }}>{cart.price}</span>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: '0.25rem' }}>
+                  <span style={{ color: 'var(--accent-gold)', fontSize: '0.95rem', fontWeight: 600 }}>{cart.price}</span>
+                  <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontWeight: 600 }}>Qty: {cart.quantity || 1}</span>
+                </div>
               </div>
             </div>
 
             <hr style={{ border: 'none', borderTop: '1px solid var(--border-color)', margin: 0 }} />
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', color: 'var(--text-main)' }}>
+                <span style={{ fontSize: '0.95rem' }}>Subtotal:</span>
+                <span style={{ fontSize: '0.95rem', fontWeight: 600 }}>₦{(cart.rawPrice * (cart.quantity || 1)).toLocaleString()}</span>
+              </div>
               <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', color: 'var(--text-main)' }}>
                 <Truck size={20} style={{ color: 'var(--accent-gold)' }} />
                 <span style={{ fontSize: '0.95rem' }}>Flat delivery rate: ₦2,500</span>
@@ -152,7 +160,7 @@ export default function CheckoutPage() {
 
             <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.3rem', fontWeight: 700, color: 'var(--primary-navy)' }}>
               <span>Pay Total</span>
-              <span>₦{(cart.rawPrice + 2500).toLocaleString()}</span>
+              <span>₦{((cart.rawPrice * (cart.quantity || 1)) + 2500).toLocaleString()}</span>
             </div>
           </motion.div>
         )}

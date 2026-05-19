@@ -5,6 +5,53 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, MeshTransmissionMaterial, Environment, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
 
+const materialProps = {
+  thickness: 0.5,
+  roughness: 0,
+  transmission: 0.95,
+  transparent: true,
+  opacity: 0.8,
+  ior: 1.1,
+  chromaticAberration: 0.05,
+  backside: true,
+};
+
+function Book({ position, rotation, color = "#ffffff" }: { position: [number, number, number]; rotation?: [number, number, number]; color?: string }) {
+  return (
+    <group position={position} rotation={rotation}>
+      {/* Pages (white-ish transparent paper block) */}
+      <mesh position={[0.02, 0, 0]}>
+        <boxGeometry args={[2.96, 0.22, 1.98]} />
+        <MeshTransmissionMaterial 
+          {...materialProps} 
+          color={color} 
+          roughness={0.2} 
+          transmission={0.9} 
+          thickness={0.2}
+        />
+      </mesh>
+      
+      {/* Top Cover */}
+      <mesh position={[0, 0.12, 0]}>
+        <boxGeometry args={[3.02, 0.02, 2.02]} />
+        <MeshTransmissionMaterial {...materialProps} color={color} roughness={0.0} thickness={0.5} />
+      </mesh>
+      
+      {/* Bottom Cover */}
+      <mesh position={[0, -0.12, 0]}>
+        <boxGeometry args={[3.02, 0.02, 2.02]} />
+        <MeshTransmissionMaterial {...materialProps} color={color} roughness={0.0} thickness={0.5} />
+      </mesh>
+      
+      {/* Spine */}
+      <mesh position={[-1.5, 0, 0]}>
+        <boxGeometry args={[0.02, 0.26, 2.02]} />
+        <MeshTransmissionMaterial {...materialProps} color={color} roughness={0.0} thickness={0.5} />
+      </mesh>
+    </group>
+  );
+}
+
 function FloatingGeometry() {
   const sphereRef = useRef<THREE.Mesh>(null);
   const octaRef = useRef<THREE.Mesh>(null);
@@ -25,17 +72,6 @@ function FloatingGeometry() {
     }
   });
 
-  const materialProps = {
-    thickness: 0.5,
-    roughness: 0,
-    transmission: 0.95,
-    transparent: true,
-    opacity: 0.8,
-    ior: 1.1,
-    chromaticAberration: 0.05,
-    backside: true,
-  };
-
   return (
     <>
       {/* Abstract "Global Knowledge / Brain" - Crystal Clear Sphere */}
@@ -54,21 +90,15 @@ function FloatingGeometry() {
         </mesh>
       </Float>
 
-      {/* Abstract "Books / Documents" - Layered Glass Plates */}
+      {/* Realistic 3D Books - Floating Glass Stack */}
       <Float speed={2} rotationIntensity={0.5} floatIntensity={1.5} position={[0, -2, -6]}>
         <group ref={layeredRef}>
-          <mesh position={[0, 0.4, 0]}>
-            <boxGeometry args={[3, 0.1, 2]} />
-            <MeshTransmissionMaterial {...materialProps} color="#ffffff" />
-          </mesh>
-          <mesh position={[0.2, 0, 0.2]}>
-            <boxGeometry args={[3, 0.1, 2]} />
-            <MeshTransmissionMaterial {...materialProps} color="#ffffff" />
-          </mesh>
-          <mesh position={[-0.2, -0.4, -0.2]}>
-            <boxGeometry args={[3, 0.1, 2]} />
-            <MeshTransmissionMaterial {...materialProps} color="#ffffff" />
-          </mesh>
+          {/* Top book */}
+          <Book position={[0, 0.35, 0]} rotation={[0, 0.1, 0]} color="#ffffff" />
+          {/* Middle book */}
+          <Book position={[0.2, 0, 0.1]} rotation={[0, -0.05, 0]} color="#ffffff" />
+          {/* Bottom book */}
+          <Book position={[-0.1, -0.35, -0.1]} rotation={[0, 0.2, 0]} color="#ffffff" />
         </group>
       </Float>
     </>

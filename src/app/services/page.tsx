@@ -13,8 +13,8 @@ export default function ServicesPage() {
   return (
     <div className="container" style={{ paddingTop: 'calc(var(--spacing-xl) + 40px)', paddingBottom: 'var(--spacing-xl)' }}>
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} style={{ marginBottom: 'var(--spacing-xl)' }}>
-        <h1 className="text-3d" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', letterSpacing: '-2px', marginBottom: '1rem' }}>Our Activities</h1>
-        <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)', maxWidth: '600px' }}>Comprehensive solutions tailored for educational, corporate, and governmental institutions.</p>
+        <h1 className="text-3d" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-1.5px', marginBottom: '1rem' }}>Our Activities</h1>
+        <p style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.25rem)', color: 'var(--text-muted)', maxWidth: '600px' }}>Comprehensive solutions tailored for educational, corporate, and governmental institutions.</p>
       </motion.div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
@@ -29,7 +29,7 @@ export default function ServicesPage() {
             style={{ padding: '3rem', borderRadius: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '2rem' }}
           >
             <div style={{ flex: '1 1 400px' }}>
-              <h2 style={{ fontSize: '2rem', marginBottom: '1rem', color: 'var(--primary-navy)' }}>{svc.title}</h2>
+              <h2 style={{ fontSize: 'clamp(1.4rem, 3vw, 1.8rem)', marginBottom: '1rem', color: 'var(--primary-navy)' }}>{svc.title}</h2>
               <p style={{ fontSize: '1.1rem', color: 'var(--text-main)' }}>{svc.desc}</p>
             </div>
             <div style={{ width: '60px', height: '60px', borderRadius: '50%', background: 'var(--accent-gold)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontWeight: 'bold', fontSize: '1.5rem' }}>

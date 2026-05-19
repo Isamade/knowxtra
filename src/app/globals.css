@@ -44,6 +44,17 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (max-width: 768px) {
+  :root {
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2.5rem;
+    --spacing-xl: 4.5rem;
+  }
+  html {
+    font-size: 14px;
+  }
+}
+
 body {
   background-color: var(--bg-light);
   color: var(--text-main);

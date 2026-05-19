@@ -10,6 +10,7 @@ export default function ProductDetailPage() {
   const id = params?.id as string;
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [currency, setCurrency] = useState("NGN");
+  const [quantity, setQuantity] = useState(1);
 
   const productsData: Record<string, { title: string; price: string; rawPrice: number; img: string; desc: string; specs: string[] }> = {
     "1": {
@@ -48,7 +49,8 @@ export default function ProductDetailPage() {
         title: product.title,
         price: product.price,
         rawPrice: product.rawPrice,
-        img: product.img
+        img: product.img,
+        quantity: quantity
       }));
     }
   };
@@ -78,8 +80,8 @@ export default function ProductDetailPage() {
           style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}
         >
           <div>
-            <h1 className="text-3d" style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', lineHeight: 1.1, marginBottom: '0.5rem' }}>{product.title}</h1>
-            <p style={{ color: 'var(--accent-gold)', fontSize: '2rem', fontWeight: 700, margin: 0, fontFamily: 'var(--font-sans)' }}>{product.price}</p>
+            <h1 className="text-3d" style={{ fontSize: 'clamp(1.75rem, 4.5vw, 2.75rem)', lineHeight: 1.1, marginBottom: '0.5rem' }}>{product.title}</h1>
+            <p style={{ color: 'var(--accent-gold)', fontSize: 'clamp(1.5rem, 3.5vw, 2rem)', fontWeight: 700, margin: 0, fontFamily: 'var(--font-sans)' }}>{product.price}</p>
           </div>
 
           <div className="glass-panel" style={{ padding: '2rem', borderRadius: '20px' }}>
@@ -95,6 +97,28 @@ export default function ProductDetailPage() {
                 <li key={i} style={{ fontSize: '1.05rem', color: 'var(--text-main)' }}>{spec}</li>
               ))}
             </ul>
+          </div>
+
+          {/* Quantity Selector */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: '0.5rem' }}>
+            <span style={{ fontSize: '1.05rem', fontWeight: 600, color: 'var(--primary-navy)' }}>Quantity:</span>
+            <div style={{ display: 'flex', alignItems: 'center', background: 'rgba(15,23,42,0.03)', border: '1px solid var(--border-color)', borderRadius: '12px', padding: '0.25rem 0.5rem' }}>
+              <button 
+                onClick={() => setQuantity(q => Math.max(1, q - 1))} 
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.4rem', padding: '0.25rem 0.75rem', fontWeight: 'bold', color: 'var(--primary-navy)' }}
+              >
+                -
+              </button>
+              <span style={{ fontSize: '1.15rem', fontWeight: 700, width: '32px', textAlign: 'center', color: 'var(--text-heading)' }}>
+                {quantity}
+              </span>
+              <button 
+                onClick={() => setQuantity(q => q + 1)} 
+                style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.4rem', padding: '0.25rem 0.75rem', fontWeight: 'bold', color: 'var(--primary-navy)' }}
+              >
+                +
+              </button>
+            </div>
           </div>
 
           <button 
@@ -175,142 +199,186 @@ export default function ProductDetailPage() {
                 background: 'rgba(255, 255, 255, 0.96)',
                 backdropFilter: 'blur(20px)',
                 boxShadow: '-20px 0 50px rgba(0,0,0,0.15)',
-                padding: '3.5rem 3rem',
+                padding: '2rem 1.5rem',
                 overflowY: 'auto',
                 zIndex: 10000,
                 display: 'flex',
-                flexDirection: 'column'
+                flexDirection: 'column',
+                gap: '1.5rem'
               }}
             >
-              {/* Close Button */}
-              <button
-                onClick={() => setCartDrawerOpen(false)}
-                style={{
-                  alignSelf: 'flex-end',
-                  background: 'none',
-                  border: 'none',
-                  cursor: 'pointer',
-                  color: 'var(--text-heading)',
-                  padding: '0.5rem',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  borderRadius: '50%',
-                  backgroundColor: 'rgba(15,23,42,0.05)',
-                  transition: 'background 0.3s'
-                }}
-              >
-                <X size={20} />
-              </button>
-
-              <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginBottom: '1.5rem' }}>
-                <ShoppingCart size={24} style={{ color: 'var(--accent-gold)' }} />
-                <h3 style={{ fontSize: '1.8rem', margin: 0, fontFamily: 'var(--font-serif)', color: 'var(--text-heading)' }}>
-                  Your Shopping Cart
-                </h3>
-              </div>
-
-              <div style={{ borderBottom: '1px solid rgba(15,23,42,0.1)', paddingBottom: '1.5rem', marginBottom: '1.5rem' }}>
-                <p style={{ color: 'var(--text-muted)', margin: '0 0 1rem', fontSize: '0.95rem' }}>
-                  The following capacity resource has been added to your session cart:
-                </p>
-
-                {/* Product row item */}
-                <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', background: 'rgba(15,23,42,0.03)', padding: '1rem', borderRadius: '16px' }}>
-                  <img src={product.img.startsWith('http') ? `${product.img}?auto=format&fit=crop&w=150&q=80` : product.img} alt={product.title} style={{ width: '64px', height: '64px', borderRadius: '12px', objectFit: 'contain', background: '#0a0f1d', padding: '0.2rem' }} />
-                  <div style={{ flex: 1 }}>
-                    <h4 style={{ margin: 0, fontSize: '1.1rem', color: 'var(--text-heading)' }}>{product.title}</h4>
-                    <p style={{ margin: '0.2rem 0 0', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Quantity: 1 (Standard Pass)</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Currency Selector Option */}
-              <div style={{ marginBottom: '1.5rem' }}>
-                <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--primary-navy)', display: 'block', marginBottom: '0.5rem' }}>
-                  Select Settlement Currency:
-                </span>
-                <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(15, 23, 42, 0.05)', padding: '0.25rem', borderRadius: '100px', alignSelf: 'flex-start', width: 'fit-content' }}>
-                  <button
-                    onClick={() => setCurrency('NGN')}
-                    style={{
-                      border: 'none',
-                      background: currency === 'NGN' ? 'white' : 'transparent',
-                      color: currency === 'NGN' ? 'var(--primary-navy)' : 'var(--text-muted)',
-                      padding: '0.5rem 1.25rem',
-                      borderRadius: '100px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.3s'
-                    }}
-                  >
-                    NGN (₦)
-                  </button>
-                  <button
-                    onClick={() => setCurrency('USD')}
-                    style={{
-                      border: 'none',
-                      background: currency === 'USD' ? 'white' : 'transparent',
-                      color: currency === 'USD' ? 'var(--primary-navy)' : 'var(--text-muted)',
-                      padding: '0.5rem 1.25rem',
-                      borderRadius: '100px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      transition: 'all 0.3s'
-                    }}
-                  >
-                    USD ($)
-                  </button>
-                </div>
-              </div>
-
-              {/* pricing summary container */}
-              <div style={{ borderLeft: '4px solid var(--accent-gold)', background: 'rgba(15, 23, 42, 0.03)', padding: '1.5rem', borderRadius: '16px', marginBottom: '2rem' }}>
-                <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)' }}>Estimated Investment Total:</span>
-                <h3 style={{ margin: '0.2rem 0 0', fontSize: '2rem', color: 'var(--primary-navy)', fontWeight: 700 }}>
-                  {currency === 'NGN' ? product.price : (id === '1' ? '$100' : id === '2' ? '$120' : '$400')}
-                </h3>
-                <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Paystack integration live for regional routing</span>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: 'auto' }}>
-                <Link href="/shop/checkout" style={{ textDecoration: 'none' }}>
-                  <button
-                    style={{
-                      width: '100%',
-                      padding: '1.25rem',
-                      background: 'var(--primary-navy)',
-                      border: 'none',
-                      color: 'white',
-                      borderRadius: '16px',
-                      fontWeight: 600,
-                      fontSize: '1.1rem',
-                      cursor: 'pointer',
-                      display: 'inline-flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem'
-                    }}
-                  >
-                    Secure Checkout
-                  </button>
-                </Link>
-
+              {/* Close Button & Header */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                 <button
                   onClick={() => setCartDrawerOpen(false)}
                   style={{
-                    width: '100%',
-                    padding: '1rem',
-                    background: 'transparent',
-                    border: '1px solid rgba(15,23,42,0.15)',
+                    alignSelf: 'flex-end',
+                    background: 'none',
+                    border: 'none',
+                    cursor: 'pointer',
                     color: 'var(--text-heading)',
-                    borderRadius: '16px',
-                    fontWeight: 600,
-                    cursor: 'pointer'
+                    padding: '0.5rem',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    borderRadius: '50%',
+                    backgroundColor: 'rgba(15,23,42,0.05)',
+                    transition: 'background 0.3s'
                   }}
                 >
-                  Continue Shopping
+                  <X size={20} />
                 </button>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
+                  <ShoppingCart size={24} style={{ color: 'var(--accent-gold)' }} />
+                  <h3 style={{ fontSize: '1.8rem', margin: 0, fontFamily: 'var(--font-serif)', color: 'var(--text-heading)' }}>
+                    Your Shopping Cart
+                  </h3>
+                </div>
+              </div>
+
+              {/* Cart Items & Calculations Content Stack */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
+                <div style={{ borderBottom: '1px solid rgba(15,23,42,0.1)', paddingBottom: '1.25rem' }}>
+                  <p style={{ color: 'var(--text-muted)', margin: '0 0 1rem', fontSize: '0.95rem', lineHeight: 1.5 }}>
+                    The following capacity resource has been added to your session cart:
+                  </p>
+
+                  {/* Product row item */}
+                  <div style={{ display: 'flex', gap: '1.25rem', alignItems: 'center', background: 'rgba(15,23,42,0.03)', padding: '1rem', borderRadius: '16px', flexWrap: 'wrap' }}>
+                    <img src={product.img.startsWith('http') ? `${product.img}?auto=format&fit=crop&w=150&q=80` : product.img} alt={product.title} style={{ width: '64px', height: '64px', borderRadius: '12px', objectFit: 'contain', background: '#0a0f1d', padding: '0.2rem' }} />
+                    <div style={{ flex: 1, minWidth: '150px' }}>
+                      <h4 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--text-heading)', fontFamily: 'var(--font-sans)', fontWeight: 600 }}>{product.title}</h4>
+                      <p style={{ margin: '0.2rem 0 0.5rem', fontSize: '0.9rem', color: 'var(--text-muted)' }}>Standard Pass</p>
+                      
+                      {/* Inline Quantity Selector inside Drawer */}
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', background: 'white', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '0.15rem 0.4rem', width: 'fit-content' }}>
+                        <button 
+                          onClick={() => {
+                            const newQty = Math.max(1, quantity - 1);
+                            setQuantity(newQty);
+                            if (typeof window !== "undefined") {
+                              localStorage.setItem("knowxtra_cart", JSON.stringify({
+                                id, title: product.title, price: product.price, rawPrice: product.rawPrice, img: product.img, quantity: newQty
+                              }));
+                            }
+                          }} 
+                          style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', padding: '0 0.4rem', fontWeight: 'bold', color: 'var(--primary-navy)' }}
+                        >
+                          -
+                        </button>
+                        <span style={{ fontSize: '0.95rem', fontWeight: 700, width: '20px', textAlign: 'center', color: 'var(--text-heading)' }}>
+                          {quantity}
+                        </span>
+                        <button 
+                          onClick={() => {
+                            const newQty = quantity + 1;
+                            setQuantity(newQty);
+                            if (typeof window !== "undefined") {
+                              localStorage.setItem("knowxtra_cart", JSON.stringify({
+                                id, title: product.title, price: product.price, rawPrice: product.rawPrice, img: product.img, quantity: newQty
+                              }));
+                            }
+                          }} 
+                          style={{ background: 'none', border: 'none', cursor: 'pointer', fontSize: '1.1rem', padding: '0 0.4rem', fontWeight: 'bold', color: 'var(--primary-navy)' }}
+                        >
+                          +
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Currency Selector Option */}
+                <div>
+                  <span style={{ fontSize: '0.9rem', fontWeight: 600, color: 'var(--primary-navy)', display: 'block', marginBottom: '0.5rem' }}>
+                    Select Settlement Currency:
+                  </span>
+                  <div style={{ display: 'flex', gap: '0.5rem', background: 'rgba(15, 23, 42, 0.05)', padding: '0.25rem', borderRadius: '100px', alignSelf: 'flex-start', width: 'fit-content' }}>
+                    <button
+                      onClick={() => setCurrency('NGN')}
+                      style={{
+                        border: 'none',
+                        background: currency === 'NGN' ? 'white' : 'transparent',
+                        color: currency === 'NGN' ? 'var(--primary-navy)' : 'var(--text-muted)',
+                        padding: '0.5rem 1.25rem',
+                        borderRadius: '100px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.3s'
+                      }}
+                    >
+                      NGN (₦)
+                    </button>
+                    <button
+                      onClick={() => setCurrency('USD')}
+                      style={{
+                        border: 'none',
+                        background: currency === 'USD' ? 'white' : 'transparent',
+                        color: currency === 'USD' ? 'var(--primary-navy)' : 'var(--text-muted)',
+                        padding: '0.5rem 1.25rem',
+                        borderRadius: '100px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                        transition: 'all 0.3s'
+                      }}
+                    >
+                      USD ($)
+                    </button>
+                  </div>
+                </div>
+
+                {/* pricing summary container */}
+                <div style={{ borderLeft: '4px solid var(--accent-gold)', background: 'rgba(15, 23, 42, 0.03)', padding: '1.25rem', borderRadius: '16px' }}>
+                  <span style={{ fontSize: '0.95rem', color: 'var(--text-muted)' }}>Estimated Investment Total:</span>
+                  <h3 style={{ margin: '0.2rem 0 0', fontSize: '1.8rem', color: 'var(--primary-navy)', fontWeight: 700 }}>
+                    {currency === 'NGN' ? `₦${(product.rawPrice * quantity).toLocaleString()}` : `$${((id === '1' ? 100 : id === '2' ? 120 : 400) * quantity).toLocaleString()}`}
+                  </h3>
+                  <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Paystack integration live for regional routing</span>
+                </div>
+
+                {/* Action Buttons grouped closely */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.5rem' }}>
+                  <Link href="/shop/checkout" style={{ textDecoration: 'none' }}>
+                    <button
+                      style={{
+                        width: '100%',
+                        padding: '1.1rem',
+                        background: 'var(--primary-navy)',
+                        border: 'none',
+                        color: 'white',
+                        borderRadius: '14px',
+                        fontWeight: 600,
+                        fontSize: '1.05rem',
+                        cursor: 'pointer',
+                        display: 'inline-flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
+                        gap: '0.5rem',
+                        transition: 'opacity 0.2s'
+                      }}
+                    >
+                      Secure Checkout
+                    </button>
+                  </Link>
+
+                  <button
+                    onClick={() => setCartDrawerOpen(false)}
+                    style={{
+                      width: '100%',
+                      padding: '0.9rem',
+                      background: 'transparent',
+                      border: '1px solid rgba(15,23,42,0.15)',
+                      color: 'var(--text-heading)',
+                      borderRadius: '14px',
+                      fontWeight: 600,
+                      cursor: 'pointer',
+                      fontSize: '0.95rem'
+                    }}
+                  >
+                    Continue Shopping
+                  </button>
+                </div>
               </div>
             </motion.div>
           </>

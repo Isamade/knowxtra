@@ -12,8 +12,8 @@ export default function ShopPage() {
   return (
     <div className="container" style={{ paddingTop: 'calc(var(--spacing-xl) + 40px)', paddingBottom: 'var(--spacing-xl)' }}>
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} style={{ textAlign: 'center', marginBottom: 'var(--spacing-xl)' }}>
-        <h1 className="text-3d" style={{ fontSize: 'clamp(3rem, 6vw, 5rem)', letterSpacing: '-2px', marginBottom: '1rem' }}>The Knowledge Shop</h1>
-        <p style={{ fontSize: '1.25rem', color: 'var(--text-muted)' }}>Premium journals, books, and exclusive event access.</p>
+        <h1 className="text-3d" style={{ fontSize: 'clamp(2rem, 5vw, 3.5rem)', letterSpacing: '-1.5px', marginBottom: '1rem' }}>The Knowledge Shop</h1>
+        <p style={{ fontSize: 'clamp(1.1rem, 1.8vw, 1.25rem)', color: 'var(--text-muted)' }}>Premium journals, books, and exclusive event access.</p>
       </motion.div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '3rem' }}>

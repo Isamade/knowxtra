@@ -66,7 +66,7 @@ export default function EventDetailPage() {
           <span style={{ background: 'var(--accent-gold)', color: 'white', padding: '0.5rem 1.25rem', borderRadius: '100px', fontWeight: 600, fontSize: '0.9rem', display: 'inline-block', marginBottom: '1rem' }}>
             {event.cost}
           </span>
-          <h1 style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', margin: 0, color: 'white', fontFamily: 'var(--font-serif)', letterSpacing: '-1px' }}>{event.title}</h1>
+          <h1 style={{ fontSize: 'clamp(1.75rem, 4vw, 3rem)', margin: 0, color: 'white', fontFamily: 'var(--font-serif)', letterSpacing: '-1px' }}>{event.title}</h1>
         </div>
       </motion.div>
 
@@ -95,7 +95,7 @@ export default function EventDetailPage() {
           {/* Main Description */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} style={{ display: 'flex', flexDirection: 'column', gap: '2rem' }}>
             <div className="glass-panel" style={{ padding: '3rem', borderRadius: '24px' }}>
-              <h3 style={{ fontSize: '1.75rem', marginBottom: '1.5rem', color: 'var(--text-heading)', fontFamily: 'var(--font-serif)' }}>About the Event</h3>
+              <h3 style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', marginBottom: '1.5rem', color: 'var(--text-heading)', fontFamily: 'var(--font-serif)' }}>About the Event</h3>
               <p style={{ fontSize: '1.15rem', color: 'var(--text-main)', lineHeight: 1.8, marginBottom: '2rem' }}>
                 {event.desc}
               </p>
@@ -117,7 +117,7 @@ export default function EventDetailPage() {
             <span style={{ textTransform: 'uppercase', letterSpacing: '2px', fontSize: '0.85rem', fontWeight: 700, color: 'var(--accent-gold)' }}>
               KnowXtra Executive Cohorts
             </span>
-            <h3 style={{ fontSize: '1.75rem', color: 'var(--text-heading)', fontFamily: 'var(--font-serif)', margin: 0 }}>
+            <h3 style={{ fontSize: 'clamp(1.35rem, 3vw, 1.75rem)', color: 'var(--text-heading)', fontFamily: 'var(--font-serif)', margin: 0 }}>
               Access Guidelines
             </h3>
             <p style={{ fontSize: '1.1rem', color: 'var(--text-main)', lineHeight: 1.7, margin: 0 }}>
