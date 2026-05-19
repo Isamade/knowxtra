@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Float, MeshTransmissionMaterial, Environment, ContactShadows } from '@react-three/drei';
 import * as THREE from 'three';
@@ -106,6 +106,36 @@ function FloatingGeometry() {
 }
 
 export default function Background3D() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
+  if (!mounted || isMobile) {
+    return (
+      <div 
+        style={{ 
+          position: 'fixed', 
+          top: 0, 
+          left: 0, 
+          width: '100vw', 
+          height: '100vh', 
+          zIndex: -1, 
+          background: 'radial-gradient(circle at 80% 20%, #ffffff 0%, #f8fafc 50%, #f1f5f9 100%)', 
+          pointerEvents: 'none' 
+        }} 
+      />
+    );
+  }
+
   return (
     <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: -1, pointerEvents: 'none' }}>
       <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>

@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, Calendar, MapPin, Award, CheckCircle, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function EventDetailPage() {
   const params = useParams();
@@ -12,6 +12,15 @@ export default function EventDetailPage() {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [selectedFacilitator, setSelectedFacilitator] = useState(0);
   const [currency, setCurrency] = useState("NGN");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
 
   const facilitators = [
     { name: "Prof. Albert K. Lar", role: "Policy & Governance Chair", rating: "4.9 ★", img: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&w=150&h=150&q=80" },
@@ -163,7 +172,7 @@ export default function EventDetailPage() {
                 position: 'fixed',
                 inset: 0,
                 background: 'rgba(15, 23, 42, 0.4)',
-                backdropFilter: 'blur(10px)',
+                backdropFilter: isMobile ? 'none' : 'blur(10px)',
                 zIndex: 9999
               }}
             />
@@ -181,8 +190,8 @@ export default function EventDetailPage() {
                 bottom: 0,
                 width: '100%',
                 maxWidth: '520px',
-                background: 'rgba(255, 255, 255, 0.96)',
-                backdropFilter: 'blur(20px)',
+                background: isMobile ? '#ffffff' : 'rgba(255, 255, 255, 0.96)',
+                backdropFilter: isMobile ? 'none' : 'blur(20px)',
                 boxShadow: '-20px 0 50px rgba(0,0,0,0.15)',
                 padding: '3.5rem 3rem',
                 overflowY: 'auto',

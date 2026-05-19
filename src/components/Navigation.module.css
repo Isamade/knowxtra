@@ -88,9 +88,7 @@
   left: 0;
   right: 0;
   height: calc(100vh - 80px);
-  background: rgba(248, 250, 252, 0.98);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  background: var(--bg-main);
   padding: 2rem 1.5rem;
   display: flex;
   flex-direction: column;

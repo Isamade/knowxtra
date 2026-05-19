@@ -1,9 +1,20 @@
 "use client";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Calendar as CalendarIcon, Clock, MapPin, Users, ArrowRight } from "lucide-react";
 
 export default function EventsPage() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
+
   const events = [
     {
       id: 1,
@@ -102,8 +113,8 @@ export default function EventsPage() {
               }}
               style={{ 
                 position: 'relative',
-                background: 'rgba(255, 255, 255, 0.75)',
-                backdropFilter: 'blur(20px)',
+                background: isMobile ? '#ffffff' : 'rgba(255, 255, 255, 0.75)',
+                backdropFilter: isMobile ? 'none' : 'blur(20px)',
                 border: '1px solid var(--border-color)',
                 borderRadius: '28px',
                 overflow: 'hidden',
@@ -111,7 +122,8 @@ export default function EventsPage() {
                 cursor: 'pointer',
                 display: 'flex',
                 flexWrap: 'wrap',
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)'
+                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
+                willChange: 'transform, box-shadow'
               }}
             >
               {/* Cover image panel with zoom effect on hover */}
@@ -131,7 +143,8 @@ export default function EventsPage() {
                     width: '100%', 
                     height: '100%', 
                     objectFit: 'cover',
-                    transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)'
+                    transition: 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                    willChange: 'transform'
                   }} 
                   className="event-card-img"
                 />

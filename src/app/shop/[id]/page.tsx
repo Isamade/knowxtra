@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft, ShoppingBag, ShieldCheck, Truck, RefreshCw, X, ShoppingCart } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function ProductDetailPage() {
   const params = useParams();
@@ -11,6 +11,15 @@ export default function ProductDetailPage() {
   const [cartDrawerOpen, setCartDrawerOpen] = useState(false);
   const [currency, setCurrency] = useState("NGN");
   const [quantity, setQuantity] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const media = window.matchMedia("(max-width: 768px)");
+    setIsMobile(media.matches);
+    const listener = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    media.addEventListener("change", listener);
+    return () => media.removeEventListener("change", listener);
+  }, []);
 
   const productsData: Record<string, { title: string; price: string; rawPrice: number; img: string; desc: string; specs: string[] }> = {
     "1": {
@@ -178,7 +187,7 @@ export default function ProductDetailPage() {
                 position: 'fixed',
                 inset: 0,
                 background: 'rgba(15, 23, 42, 0.4)',
-                backdropFilter: 'blur(10px)',
+                backdropFilter: isMobile ? 'none' : 'blur(10px)',
                 zIndex: 9999
               }}
             />
@@ -196,8 +205,8 @@ export default function ProductDetailPage() {
                 bottom: 0,
                 width: '100%',
                 maxWidth: '520px',
-                background: 'rgba(255, 255, 255, 0.96)',
-                backdropFilter: 'blur(20px)',
+                background: isMobile ? '#ffffff' : 'rgba(255, 255, 255, 0.96)',
+                backdropFilter: isMobile ? 'none' : 'blur(20px)',
                 boxShadow: '-20px 0 50px rgba(0,0,0,0.15)',
                 padding: '2rem 1.5rem',
                 overflowY: 'auto',
