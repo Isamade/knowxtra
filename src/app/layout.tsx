@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import Background3D from "@/components/Background3D";
+import AncientLibraryBackground from "@/components/AncientLibraryBackground";
 
 export const metadata: Metadata = {
   title: "KnowXtra | Global Capacity Development",
@@ -20,9 +20,9 @@ export default function RootLayout({
         <div className="pristine-bg" />
         <div className="subtle-grain" />
         <div className="holographic-spine" />
-        <Background3D />
+        <AncientLibraryBackground />
         <Navigation />
-        <main style={{ paddingTop: "80px", paddingLeft: "16px", flex: 1, position: 'relative', zIndex: 1, perspective: '2500px' }}>{children}</main>
+        <main className="main-content" style={{ paddingLeft: "16px", flex: 1, position: 'relative', zIndex: 1, perspective: '2500px' }}>{children}</main>
         <Footer />
       </body>
     </html>

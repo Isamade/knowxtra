@@ -1,63 +1,148 @@
 .hero {
-  min-height: calc(100vh - 80px);
-  display: flex;
-  align-items: center;
   position: relative;
-  padding: var(--spacing-xl) 0;
+  padding: var(--spacing-md) 0 var(--spacing-lg);
+  background: transparent;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-md);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .heroGrid {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-lg);
+  }
 }
 
 .heroContent {
-  max-width: 900px;
   position: relative;
   z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .eyebrow {
   display: inline-block;
-  padding: 0.5rem 1rem;
-  background: rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.6);
-  border-radius: 100px;
+  font-family: var(--font-serif);
   font-size: 0.85rem;
-  font-weight: 600;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 2px;
-  color: var(--primary-navy);
+  color: var(--accent-gold);
   margin-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 2px;
 }
 
 .heroTitle {
-  font-size: clamp(2rem, 5vw, 4.5rem);
-  line-height: 1.1;
-  margin-bottom: var(--spacing-md);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  line-height: 1.15;
+  margin-bottom: var(--spacing-xs);
   color: var(--text-heading);
   letter-spacing: -1.5px;
+  font-family: var(--font-serif);
 }
 
-.heroTitle span {
-  display: block;
-  background: linear-gradient(135deg, var(--accent-gold) 0%, #B8860B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.rollWrapper {
+  display: inline-block;
+  position: relative;
+  height: 1.2em;
+  vertical-align: bottom;
+  overflow: hidden;
+  width: 100%;
+}
+
+.heroDivider {
+  width: 100%;
+  border: none;
+  border-top: 4px double var(--border-color);
+  margin: var(--spacing-sm) 0 var(--spacing-md);
 }
 
 .heroSubtitle {
-  font-size: clamp(1rem, 1.8vw, 1.25rem);
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
   color: var(--text-main);
-  max-width: 700px;
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   font-weight: 400;
-  line-height: 1.6;
+  line-height: 1.65;
+  text-align: justify;
+}
+
+.heroButtons {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.visionBtn:hover {
+  background-color: rgba(17, 17, 17, 0.05);
+}
+
+/* Framed Newspaper Engraving styles */
+.heroVisual {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-md);
+}
+
+@media (min-width: 1024px) {
+  .heroVisual {
+    margin-top: 0;
+  }
+}
+
+.engravingFrame {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  padding: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.02);
+  width: 100%;
+  max-width: 480px;
+}
+
+.retroImage {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  mix-blend-mode: multiply; /* Perfectly prints onto paper background! */
+  opacity: 0.9;
+  filter: contrast(1.02) sepia(0.08);
+  border: 1px solid var(--border-color);
+}
+
+.engravingCaption {
+  font-family: var(--font-serif);
+  font-size: 0.8rem;
+  font-style: italic;
+  line-height: 1.4;
+  color: var(--text-muted);
+  margin-top: 10px;
+  text-align: left;
+  border-top: 1px solid var(--border-color);
+  padding-top: 8px;
+}
+
+.engravingCaption span {
+  font-weight: 700;
+  color: var(--text-heading);
+  font-style: normal;
 }
 
 .glassCard {
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(243, 237, 227, 0.9); /* Slightly darker/aged newsprint card background */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.7);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.03);
+  border: 1px solid rgba(15, 22, 53, 0.16); /* Delicate brand ink border */
+  box-shadow: 4px 4px 0px rgba(15, 22, 53, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
   border-radius: 24px;
   padding: var(--spacing-lg);
   transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -67,8 +152,9 @@
 
 .glassCard:hover {
   transform: translateY(-5px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.08);
-  background: rgba(255, 255, 255, 0.6);
+  box-shadow: 6px 6px 0px rgba(15, 22, 53, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  background: rgba(239, 232, 220, 0.94); /* Slightly deeper/aged tone on hover */
+  border-color: rgba(15, 22, 53, 0.25);
 }
 
 .bentoGrid {
@@ -303,6 +389,154 @@
 @media (min-width: 768px) {
   .codexCardBody {
     padding: 3.5rem;
+  }
+}
+
+@keyframes spinSlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.astrolabeEmblemWrapper {
+  width: 280px;
+  height: 280px;
+  margin-bottom: var(--spacing-md);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 12;
+  filter: drop-shadow(0 10px 20px rgba(15, 22, 53, 0.06)); /* Casts a drop-shadow of the ink lines themselves! */
+}
+
+.astrolabeEmblem {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  animation: spinSlow 120s linear infinite;
+  pointer-events: none;
+}
+
+@media (max-width: 768px) {
+  .astrolabeEmblemWrapper {
+    width: 180px;
+    height: 180px;
+    margin-bottom: var(--spacing-sm);
+  }
+}
+
+.heroCentered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 840px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+  padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-lg);
+  
+  /* Freestanding library pedestal frame: integrates with the Alexandria columns and archways */
+  border: 3px double var(--border-color);
+  background: rgba(248, 243, 231, 0.90);
+  backdrop-filter: blur(8px);
+  box-shadow: 
+    0 20px 40px rgba(15, 22, 53, 0.08), 
+    inset 1px 1px 0 rgba(255, 255, 255, 0.8);
+  border-radius: 8px;
+}
+
+@media (max-width: 768px) {
+  .heroCentered {
+    border: none;
+    background: transparent;
+    backdrop-filter: none;
+    box-shadow: none;
+    padding: var(--spacing-md) 0 var(--spacing-lg);
+  }
+}
+
+.heroTitleCentered {
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 1.1;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-heading);
+  letter-spacing: -2px;
+  font-family: var(--font-serif);
+  
+  /* Chiseled letterpress engraving text effect */
+  text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.9), -0.5px -0.5px 0px rgba(15, 22, 53, 0.22);
+}
+
+.rollWrapperCentered {
+  display: inline-block;
+  position: relative;
+  height: 1.25em;
+  vertical-align: bottom;
+  overflow: hidden;
+  width: 100%;
+}
+
+.heroDividerCentered {
+  width: 80%;
+  max-width: 600px;
+  border: none;
+  border-top: 4px double var(--border-color);
+  margin: var(--spacing-sm) 0 var(--spacing-md);
+}
+
+.heroSubtitleCentered {
+  font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+  color: var(--text-main);
+  margin-bottom: var(--spacing-lg);
+  font-weight: 400;
+  line-height: 1.7;
+  text-align: center;
+  max-width: 780px;
+}
+
+.heroSubtitleCentered::first-letter {
+  font-family: var(--font-serif);
+  float: none;
+  font-size: inherit;
+  line-height: inherit;
+  padding: 0;
+  font-weight: inherit;
+  color: inherit;
+  text-shadow: none;
+}
+
+.heroButtonsCentered {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+/* Background elements are modularly defined inside DigitalSpaceBackground.module.css */
+
+.cursorTrail {
+  position: fixed;
+  width: 28px;
+  height: 28px;
+  border: 1.5px solid var(--color-accent);
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: transform 0.08s ease-out, opacity 0.3s ease;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(224, 58, 62, 0.3), inset 0 0 4px rgba(224, 58, 62, 0.15);
+}
+
+@media (max-width: 768px) {
+  .cursorTrail {
+    display: none; /* Hide custom cursor on mobile touch screens */
   }
 }
 

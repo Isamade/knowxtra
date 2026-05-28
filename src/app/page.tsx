@@ -1,9 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion } from "framer-motion";
+import React, { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Users, Presentation, Library, Globe } from "lucide-react";
+import DigitalSpaceBackground from "../components/DigitalSpaceBackground";
 import styles from "./page.module.css";
 
 const fadeUp = {
@@ -21,54 +22,143 @@ const staggerContainer = {
   }
 };
 
+function DecryptedText({ text }: { text: string }) {
+  const [displayText, setDisplayText] = useState(text);
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+*}>%@{}$";
+
+  useEffect(() => {
+    let iterations = 0;
+    const interval = setInterval(() => {
+      setDisplayText((prev) =>
+        text
+          .split("")
+          .map((char, index) => {
+            if (char === " ") return " ";
+            if (index < iterations) {
+              return text[index];
+            }
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+
+      if (iterations >= text.length) {
+        clearInterval(interval);
+      }
+      iterations += 1 / 3; // Decrypting speed
+    }, 30);
+
+    return () => clearInterval(interval);
+  }, [text]);
+
+  return <>{displayText}</>;
+}
+
 export default function Home() {
+  const [rollIndex, setRollIndex] = useState(0);
+  const [cursorPos, setCursorPos] = useState({ x: -100, y: -100 });
+  const [showCursor, setShowCursor] = useState(false);
+
+  const rollCopies = [
+    "Human Capacity.",
+    "Strategic Policy.",
+    "Global Summits.",
+    "Academic Journals."
+  ];
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRollIndex((prev) => (prev + 1) % rollCopies.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  useEffect(() => {
+    const moveCursor = (e: MouseEvent) => {
+      setCursorPos({ x: e.clientX, y: e.clientY });
+      setShowCursor(true);
+    };
+    window.addEventListener("mousemove", moveCursor);
+    return () => window.removeEventListener("mousemove", moveCursor);
+  }, []);
+
   return (
     <>
       {/* Hero Section */}
-      <section className={styles.hero} style={{ overflow: 'hidden' }}>
-        {/* Stylized background hero image */}
-        <div 
-          style={{ 
-            position: 'absolute', 
-            top: 0, 
-            right: 0, 
-            width: '50%', 
-            height: '100%', 
-            opacity: 0.12, 
-            backgroundImage: 'url("https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1200&q=80")', 
-            backgroundSize: 'cover', 
-            backgroundPosition: 'center', 
-            maskImage: 'linear-gradient(to left, rgba(0,0,0,1), transparent)',
-            WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,1), transparent)',
-            pointerEvents: 'none',
-            zIndex: 0
-          }} 
-        />
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <motion.div 
-            className={styles.heroContent}
-            initial="hidden"
-            animate="visible"
-            variants={staggerContainer}
-          >
-            <motion.div className={styles.eyebrow} variants={fadeUp}>
-              Simplistic Sophistication
+      <section className={styles.hero}>
+        {/* Realistic interactive digital space grid, binary stream columns and microchip traces background */}
+        <DigitalSpaceBackground />
+        
+        <div className="container" style={{ position: 'relative', zIndex: 10 }}>
+          <div className={styles.heroCentered}>
+            {/* Centered Editorial masthead eyebrow */}
+            <motion.div 
+              className={styles.eyebrow} 
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            >
+              ★ THE KNOWXTRA ADVANTAGE ★
             </motion.div>
-            <motion.h1 className={`${styles.heroTitle} text-3d`} variants={fadeUp}>
-              The Future of <br /><span className="text-3d-gold">Human Capacity.</span>
+            
+            {/* Centered Large Title */}
+            <motion.h1 
+              className={`${styles.heroTitleCentered} text-3d`} 
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            >
+              The Future of <br />
+              <span className={styles.rollWrapperCentered}>
+                <AnimatePresence mode="wait">
+                  <motion.span
+                    key={rollIndex}
+                    initial={{ y: 35, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -35, opacity: 0 }}
+                    transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                    className="text-3d-gold"
+                    style={{ display: "inline-block" }}
+                  >
+                    <DecryptedText text={rollCopies[rollIndex]} />
+                  </motion.span>
+                </AnimatePresence>
+              </span>
             </motion.h1>
-            <motion.p className={styles.heroSubtitle} variants={fadeUp}>
-              We are raising the profile of our clients to global standards. Through our cutting-edge network and state-of-the-art initiatives, we generate significant intellectual, social, economic, and political values.
+
+            {/* Centered Newspaper Double Divider */}
+            <motion.hr 
+              className={styles.heroDividerCentered} 
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            />
+            
+            {/* Centered Subtitle */}
+            <motion.p 
+              className={`${styles.heroSubtitleCentered} drop-cap`} 
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            >
+              We are raising the profile of our clients to global standards. Through our cutting-edge network and state-of-the-art initiatives, we generate significant intellectual, social, economic, and political values across all administrative and corporate sectors by synthesizing classical human knowledge with advanced, futuristic technology.
             </motion.p>
-            <motion.div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }} variants={fadeUp}>
-              <Link href="/services" style={{ background: 'var(--primary-navy)', color: '#fff', padding: '1rem 2rem', borderRadius: '100px', fontWeight: 500, display: 'inline-flex', alignItems: 'center', gap: '0.5rem', transition: 'transform 0.3s' }}>
-                Discover Initiatives <ArrowRight size={18} />
+            
+            {/* Centered CTA Buttons */}
+            <motion.div 
+              className={styles.heroButtonsCentered} 
+              variants={fadeUp}
+              initial="hidden"
+              animate="visible"
+            >
+              <Link href="/services" style={{ background: 'var(--primary-navy)', color: '#fff', padding: '1rem 2.2rem', borderRadius: '4px', fontWeight: 600, display: 'inline-flex', alignItems: 'center', gap: '0.65rem', border: '1px solid var(--primary-navy)' }}>
+                Discover Initiatives <ArrowRight size={16} />
               </Link>
-              <Link href="/about" style={{ background: 'rgba(255,255,255,0.8)', backdropFilter: 'blur(10px)', color: 'var(--primary-navy)', padding: '1rem 2rem', borderRadius: '100px', fontWeight: 500, border: '1px solid rgba(15,23,42,0.1)' }}>
+              <Link href="/about" style={{ background: 'transparent', color: 'var(--primary-navy)', padding: '1rem 2.2rem', borderRadius: '4px', fontWeight: 600, border: '1px solid var(--border-color)', transition: 'background-color 0.3s' }} className={styles.visionBtn}>
                 Our Vision
               </Link>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -116,6 +206,16 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+      {/* Breathtaking interactive cursor trail inspired by Sidewave */}
+      {showCursor && (
+        <div
+          className={styles.cursorTrail}
+          style={{
+            left: cursorPos.x,
+            top: cursorPos.y,
+          }}
+        />
+      )}
     </>
   );
 }

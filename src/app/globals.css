@@ -1,21 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@200..800&display=swap');
 
 :root {
-  /* Brand Colors - Pristine Light Theme */
-  --primary-navy: #0F172A;
-  --accent-gold: #D4AF37;
-  --accent-gold-hover: #F1C40F;
-  --accent-pastel-blue: #E0F2FE;
-  --accent-pastel-gold: #FEF3C7;
+  /* Brand Colors - Vintage Editorial Newspaper Theme */
+  --primary-navy: #0F1635; /* Deep Brand Navy Ink */
+  --accent-gold: #FF3B00; /* Vibrant Brand Red-Orange */
+  --accent-gold-hover: #E03300; /* Brand Orange-Red Hover */
+  --accent-pastel-blue: #FAF5EB; /* Cream Paper */
+  --accent-pastel-gold: #F4EFEB; /* Secondary Parchment */
 
   /* Neutral Colors */
-  --bg-light: #F8FAFC;
-  --bg-secondary: #FFFFFF;
-  --surface-light: rgba(255, 255, 255, 0.7);
-  --text-main: #334155;
-  --text-heading: #0F172A;
-  --text-muted: #64748B;
-  --border-color: rgba(15, 23, 42, 0.08);
+  --bg-light: #FAF6EE; /* Exquisite Newsprint Cream */
+  --bg-secondary: #F5EFEB; /* Weathered Paper */
+  --surface-light: rgba(250, 246, 238, 0.82);
+  --text-main: #2A2A2A; /* Slate Carbon Ink */
+  --text-heading: #0F1635; /* Deep Brand Navy Ink */
+  --text-muted: #5E5A52; /* Weathered Typographic Ink */
+  --border-color: rgba(15, 22, 53, 0.12); /* Navy-tinted Double Thin Border Ink */
 
   /* Spacing */
   --spacing-xs: 0.5rem;
@@ -67,14 +67,14 @@ body {
   flex-direction: column;
 }
 
-/* Base mesh backgrounds for the pristine light theme with vibrant gradient colour effect */
+/* Warm sepia paper background with a radial fade */
 .pristine-bg {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, #E0F2FE 0%, #F8FAFC 50%, #FEF3C7 100%);
+  background: radial-gradient(circle at 50% 50%, #FDFBF7 0%, #FAF5EB 60%, #F2ECDC 100%);
   z-index: -2;
   pointer-events: none;
 }
@@ -88,28 +88,22 @@ body {
   height: 100vh;
   pointer-events: none;
   z-index: -1; /* Placed behind content so text remains ultra-sharp and clean */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  opacity: 0.15; /* High enough opacity so grain is clearly visible and gorgeous on the gradient */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.18; /* Increased opacity for clear paper texture tactile look */
 }
 
-/* 3D Refined Metallic Text Effect (Stylish & Integrated) */
+/* Ink Letterpress Text Effect (Stylized & Integrated) */
 .text-3d {
-  background: linear-gradient(180deg, #1E293B 0%, #0F172A 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: var(--text-heading);
-  text-shadow: 1px 2px 4px rgba(15, 23, 42, 0.2);
+  text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.7), -0.5px -0.5px 1px rgba(0, 0, 0, 0.3);
 }
 
 .text-3d-gold {
-  background: linear-gradient(180deg, #D4AF37 0%, #B8860B 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   color: var(--accent-gold);
-  text-shadow: 1px 2px 4px rgba(212, 175, 55, 0.3);
+  text-shadow: 0.5px 0.5px 1px rgba(255, 255, 255, 0.7), -0.5px -0.5px 1px rgba(163, 126, 44, 0.3);
 }
 
-/* The Digital Codex Spine */
+/* The Digital Codex Spine (adapted to high-end vintage gold leather spine) */
 .holographic-spine {
   position: fixed;
   left: 0;
@@ -117,16 +111,63 @@ body {
   bottom: 0;
   width: 6px;
   background: linear-gradient(to bottom, var(--accent-gold), var(--primary-navy), var(--accent-gold));
-  box-shadow: 4px 0 20px rgba(212, 175, 55, 0.6);
+  box-shadow: 2px 0 15px rgba(163, 126, 44, 0.4);
   z-index: 9999;
 }
 
+/* Vintage Editorial Layout Elements */
+.border-double-top {
+  border-top: 4px double var(--border-color);
+}
+
+.border-double-bottom {
+  border-bottom: 4px double var(--border-color);
+}
+
+.border-double-y {
+  border-top: 4px double var(--border-color);
+  border-bottom: 4px double var(--border-color);
+}
+
+.border-single-y {
+  border-top: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.news-divider {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, transparent, var(--border-color), transparent);
+  margin: var(--spacing-md) 0;
+}
+
+/* Vintage drop cap for the first paragraph of sections */
+.drop-cap::first-letter {
+  font-family: var(--font-serif);
+  float: left;
+  font-size: 3.8rem;
+  line-height: 0.8;
+  padding-top: 6px;
+  padding-right: 10px;
+  padding-left: 3px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-shadow: 0.5px 0.5px 0px rgba(0,0,0,0.1);
+}
+
 .glass-panel {
-  background: rgba(255, 255, 255, 0.6);
+  background: rgba(243, 237, 227, 0.9); /* Vintage newsprint/parchment card tone */
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  box-shadow: 0 10px 40px 0 rgba(15, 23, 42, 0.03);
+  border: 1px solid rgba(15, 22, 53, 0.16); /* Fine ink line border */
+  box-shadow: 4px 4px 0px rgba(15, 22, 53, 0.05), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: var(--transition-smooth);
+}
+
+.glass-panel:hover {
+  background: rgba(239, 232, 220, 0.94); /* Aged pulp paper shifts to slightly deeper tone on hover */
+  border-color: rgba(15, 22, 53, 0.25);
+  box-shadow: 6px 6px 0px rgba(15, 22, 53, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -192,3 +233,22 @@ img, video {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--primary-navy);
 }
+
+.main-content {
+  padding-top: 70px;
+}
+
+@media (min-width: 1024px) {
+  .main-content {
+    padding-top: 154px;
+  }
+}
+
+/* Ancient Library background responsiveness */
+@media (max-width: 768px) {
+  .ancient-column-left,
+  .ancient-column-right {
+    display: none !important;
+  }
+}
+

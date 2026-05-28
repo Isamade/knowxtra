@@ -9,7 +9,11 @@ export default function Footer() {
           {/* Brand Col */}
           <div className={styles.brand}>
             <Link href="/" className={styles.logo}>
-              Know<span>Xtra</span>
+              <img 
+                src="/images/logo_transparent.png" 
+                alt="KnowXtra Logo" 
+                className={styles.footerLogoImage} 
+              />
             </Link>
             <p className={styles.description}>
               A human capacity development company with a strategic focus on

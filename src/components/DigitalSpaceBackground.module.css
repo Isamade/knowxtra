@@ -1,0 +1,320 @@
+.digitalWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 1. Immersive Atmospheric Neon Mesh Gradients */
+.ambientGlowLeft,
+.ambientGlowRight,
+.ambientGlowCenter {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ambientGlowLeft {
+  top: -15%;
+  left: -10%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(circle, rgba(15, 22, 53, 0.07) 0%, transparent 75%);
+  filter: blur(80px);
+  animation: pulseGlow 14s ease-in-out infinite alternate;
+}
+
+.ambientGlowRight {
+  bottom: -15%;
+  right: -10%;
+  width: 60%;
+  height: 60%;
+  background: radial-gradient(circle, rgba(224, 58, 62, 0.06) 0%, transparent 75%);
+  filter: blur(80px);
+  animation: pulseGlow 18s ease-in-out infinite alternate;
+}
+
+.ambientGlowCenter {
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(15, 22, 53, 0.04) 0%, transparent 65%);
+  filter: blur(70px);
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.5;
+    transform: scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+/* 2. Global cybernetic coordinate grid background */
+.digitalGrid {
+  position: absolute;
+  top: -5%;
+  left: -5%;
+  width: 110%;
+  height: 110%;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(15, 22, 53, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(15, 22, 53, 0.05) 1px, transparent 1px);
+  opacity: 0.95;
+  transition: transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+/* 3. Stylized Portrait of Albert Einstein & Da Vinci watermarks */
+.figureWatermarkLeft {
+  position: absolute;
+  top: 10%;
+  left: -2%;
+  width: 480px;
+  height: 480px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.12;
+  mix-blend-mode: multiply;
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.figureWatermarkRight {
+  position: absolute;
+  bottom: 5%;
+  right: -3%;
+  width: 540px;
+  height: 540px;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.14;
+  mix-blend-mode: multiply;
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.watermarkImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* 4. Fluid Glowing Cybernetic Light Waves */
+.wavesContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.95;
+  transition: transform 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.waveSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.wavePath1 {
+  animation: floatWave1 14s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 25px rgba(15, 22, 53, 0.18));
+}
+
+.wavePath2 {
+  animation: floatWave2 18s ease-in-out infinite alternate;
+  filter: drop-shadow(0 0 30px rgba(224, 58, 62, 0.3));
+}
+
+@keyframes floatWave1 {
+  0% {
+    transform: translateY(-20px) scaleY(0.95);
+  }
+  100% {
+    transform: translateY(20px) scaleY(1.05);
+  }
+}
+
+@keyframes floatWave2 {
+  0% {
+    transform: translateY(25px) scaleY(1.05);
+  }
+  100% {
+    transform: translateY(-25px) scaleY(0.95);
+  }
+}
+
+/* 5. Highly Graphic Topological Global Knowledge Vector Map */
+.constellationWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.95;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.constellationSvg {
+  width: 100%;
+  height: 100%;
+}
+
+.glowingVertice {
+  animation: pulseVertice 3s ease-in-out infinite alternate;
+}
+
+@keyframes pulseVertice {
+  0% {
+    opacity: 0.6;
+    transform: scale(0.9);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1.2);
+    filter: drop-shadow(0 0 8px currentColor);
+  }
+}
+
+/* 6. Microchip Circuit Columns */
+.circuitColumnLeft,
+.circuitColumnRight {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  z-index: 2;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.circuitColumnLeft {
+  left: 2%;
+}
+
+.circuitColumnRight {
+  right: 2%;
+}
+
+.circuitSvg {
+  width: 100%;
+  height: 96%;
+}
+
+/* 7. Horizontal Information flow Rails (Digital Shelves) */
+.dataShelfTop,
+.dataShelfBottom {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 12px;
+  z-index: 1;
+}
+
+.dataShelfTop {
+  top: 20%;
+}
+
+.dataShelfBottom {
+  bottom: 20%;
+}
+
+.dataRail {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(to right, transparent 5%, rgba(15, 22, 53, 0.12) 20%, rgba(15, 22, 53, 0.12) 80%, transparent 95%);
+}
+
+.dataNodeRow {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 8px;
+}
+
+.glowingNode {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--color-accent);
+  box-shadow: 0 0 10px var(--color-accent), 0 0 4px var(--color-accent);
+  animation: movePacket 16s linear infinite;
+  opacity: 0;
+}
+
+@keyframes movePacket {
+  0% {
+    left: 8%;
+    opacity: 0;
+  }
+  5% {
+    opacity: 0.9;
+  }
+  95% {
+    opacity: 0.9;
+  }
+  100% {
+    left: 92%;
+    opacity: 0;
+  }
+}
+
+@media (max-width: 1200px) {
+  .figureWatermarkLeft {
+    width: 320px;
+    height: 320px;
+    top: 15%;
+  }
+  .figureWatermarkRight {
+    width: 380px;
+    height: 380px;
+    bottom: 8%;
+  }
+}
+
+@media (max-width: 768px) {
+  .circuitColumnLeft,
+  .circuitColumnRight,
+  .wavesContainer,
+  .constellationWrapper {
+    display: none; /* Hide wireframes to prevent mobile browser lag */
+  }
+  .figureWatermarkLeft {
+    display: block !important;
+    top: 4%;
+    left: -12%;
+    width: 220px;
+    height: 220px;
+    opacity: 0.08; /* Blends extremely softly as a watermark watermark */
+  }
+  .figureWatermarkRight {
+    display: block !important;
+    bottom: 4%;
+    right: -10%;
+    width: 240px;
+    height: 240px;
+    opacity: 0.09;
+  }
+  .dataShelfTop {
+    top: 15%;
+  }
+  .dataShelfBottom {
+    bottom: 15%;
+  }
+}
