@@ -109,23 +109,19 @@ export default function EventsPage() {
               transition={{ delay: i * 0.1, duration: 0.6 }}
               whileHover={{ 
                 y: -6, 
-                boxShadow: '0 30px 60px rgba(15, 23, 42, 0.09)'
               }}
+              className="glass-panel"
               style={{ 
                 position: 'relative',
-                background: isMobile ? '#ffffff' : 'rgba(255, 255, 255, 0.75)',
-                backdropFilter: isMobile ? 'none' : 'blur(20px)',
-                border: '1px solid var(--border-color)',
                 borderRadius: '28px',
                 overflow: 'hidden',
-                boxShadow: '0 20px 45px rgba(15, 23, 42, 0.05)',
                 cursor: 'pointer',
                 display: 'flex',
                 flexWrap: 'wrap',
-                transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
                 willChange: 'transform, box-shadow',
                 padding: isMobile ? '1.25rem' : '0',
-                gap: isMobile ? '1.25rem' : '0'
+                gap: isMobile ? '1.25rem' : '0',
+                width: '100%'
               }}
             >
               {/* Cover image panel with zoom effect on hover */}

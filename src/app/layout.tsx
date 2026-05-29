@@ -3,6 +3,7 @@ import "./globals.css";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import AncientLibraryBackground from "@/components/AncientLibraryBackground";
+import WisdomJournalWidget from "@/components/WisdomJournalWidget";
 
 export const metadata: Metadata = {
   title: "KnowXtra | Global Capacity Development",
@@ -24,6 +25,7 @@ export default function RootLayout({
         <Navigation />
         <main className="main-content" style={{ paddingLeft: "16px", flex: 1, position: 'relative', zIndex: 1, perspective: '2500px' }}>{children}</main>
         <Footer />
+        <WisdomJournalWidget />
       </body>
     </html>
   );

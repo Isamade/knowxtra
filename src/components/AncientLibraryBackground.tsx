@@ -1,8 +1,47 @@
 "use client";
 
 import React from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function AncientLibraryBackground() {
+  const pathname = usePathname();
+
+  // Define layout configurations based on current path
+  const getPortraitsForRoute = (path: string) => {
+    switch (path) {
+      case '/about':
+        return {
+          leftTop: { src: '/images/wole_soyinka_portrait.png', alt: 'Wole Soyinka' },
+          leftBottom: { src: '/images/chimamanda_adichie_portrait.png', alt: 'Chimamanda Ngozi Adichie' },
+          rightTop: { src: '/images/marie_curie_portrait.png', alt: 'Marie Curie' },
+          rightBottom: { src: '/images/grace_alele_portrait.png', alt: 'Grace Alele-Williams' }
+        };
+      case '/services':
+        return {
+          leftTop: { src: '/images/albert_einstein_portrait.png', alt: 'Albert Einstein' },
+          leftBottom: { src: '/images/grace_alele_portrait.png', alt: 'Grace Alele-Williams' },
+          rightTop: { src: '/images/isaac_newton_portrait.png', alt: 'Isaac Newton' },
+          rightBottom: { src: '/images/kwame_nkrumah_portrait.png', alt: 'Kwame Nkrumah' }
+        };
+      case '/events':
+        return {
+          leftTop: { src: '/images/kwame_nkrumah_portrait.png', alt: 'Kwame Nkrumah' },
+          leftBottom: { src: '/images/isaac_newton_portrait.png', alt: 'Isaac Newton' },
+          rightTop: { src: '/images/marie_curie_portrait.png', alt: 'Marie Curie' },
+          rightBottom: { src: '/images/chimamanda_adichie_portrait.png', alt: 'Chimamanda Ngozi Adichie' }
+        };
+      case '/':
+      default:
+        return {
+          leftTop: { src: '/images/chinua_achebe_portrait.png', alt: 'Chinua Achebe' },
+          leftBottom: { src: '/images/wole_soyinka_portrait.png', alt: 'Wole Soyinka' },
+          rightTop: { src: '/images/grace_alele_portrait.png', alt: 'Grace Alele-Williams' },
+          rightBottom: { src: '/images/kwame_nkrumah_portrait.png', alt: 'Kwame Nkrumah' }
+        };
+    }
+  };
+
+  const portraits = getPortraitsForRoute(pathname || '/');
   return (
     <div 
       style={{ 
@@ -185,6 +224,49 @@ export default function AncientLibraryBackground() {
         <circle cx="120" cy="510" r="10" />
         <circle cx="110" cy="492" r="10" />
       </svg>
+
+      {/* 5. Vintage Intellectual Watermarks scattered behind content */}
+      <div className="library-watermark-container">
+        {/* Left Top */}
+        <div className="library-watermark-wrapper watermark-pos-left-top">
+          <img 
+            src={portraits.leftTop.src} 
+            alt={`${portraits.leftTop.alt} Portrait Watermark`} 
+            className="library-watermark-image"
+          />
+          <span className="library-watermark-label">{portraits.leftTop.alt}</span>
+        </div>
+
+        {/* Right Top */}
+        <div className="library-watermark-wrapper watermark-pos-right-top">
+          <img 
+            src={portraits.rightTop.src} 
+            alt={`${portraits.rightTop.alt} Portrait Watermark`} 
+            className="library-watermark-image"
+          />
+          <span className="library-watermark-label">{portraits.rightTop.alt}</span>
+        </div>
+
+        {/* Left Bottom */}
+        <div className="library-watermark-wrapper watermark-pos-left-bottom">
+          <img 
+            src={portraits.leftBottom.src} 
+            alt={`${portraits.leftBottom.alt} Portrait Watermark`} 
+            className="library-watermark-image"
+          />
+          <span className="library-watermark-label">{portraits.leftBottom.alt}</span>
+        </div>
+
+        {/* Right Bottom */}
+        <div className="library-watermark-wrapper watermark-pos-right-bottom">
+          <img 
+            src={portraits.rightBottom.src} 
+            alt={`${portraits.rightBottom.alt} Portrait Watermark`} 
+            className="library-watermark-image"
+          />
+          <span className="library-watermark-label">{portraits.rightBottom.alt}</span>
+        </div>
+      </div>
     </div>
   );
 }

@@ -163,7 +163,21 @@ export default function Home() {
       </section>
 
       {/* Cinematic Video Placeholder */}
-      <section className="container">
+      <section className="container" style={{ position: 'relative' }}>
+        {/* Antique Compass Schema floating at the left margin */}
+        <div className="tactile-sticker compass-sticker" style={{
+          position: 'absolute',
+          bottom: '-30px',
+          left: '-80px',
+          width: '180px',
+          height: 'auto',
+          zIndex: 5,
+          pointerEvents: 'auto',
+          cursor: 'grab'
+        }}>
+          <img src="/images/antique_drafting_compass.png" alt="Drafting Compass Schema" style={{ width: '100%', height: 'auto', mixBlendMode: 'multiply' }} />
+        </div>
+
         <motion.div 
           className={styles.videoSection}
           initial={{ opacity: 0, scale: 0.95 }}
@@ -185,8 +199,61 @@ export default function Home() {
       </section>
 
       {/* Services Dynamic Codex Tab Grid (Plateau Style Integration) */}
-      <section style={{ padding: 'var(--spacing-lg) 0 var(--spacing-xl)' }}>
-        <div className="container">
+      <section style={{ padding: 'var(--spacing-lg) 0 var(--spacing-xl)', position: 'relative' }}>
+        {/* Vintage Stamp (Lagos Postmark) floating on the right edge */}
+        <div className="tactile-sticker stamp-sticker" style={{
+          position: 'absolute',
+          top: '5%',
+          right: '4%',
+          width: '130px',
+          height: 'auto',
+          zIndex: 5,
+          pointerEvents: 'auto',
+          cursor: 'grab'
+        }}>
+          <img src="/images/vintage_postmark_stamp.png" alt="Lagos Postage Stamp" style={{ width: '100%', height: 'auto', mixBlendMode: 'multiply' }} />
+        </div>
+
+        <div className="container" style={{ position: 'relative' }}>
+          {/* Paperclipped Scribble Note near the right side of the CodexTabGrid card */}
+          <div className="tactile-sticker note-sticker" style={{
+            position: 'absolute',
+            top: '-20px',
+            right: '-40px',
+            width: '210px',
+            background: '#fcfaf2',
+            border: '1px solid rgba(15, 22, 53, 0.15)',
+            boxShadow: '3px 3px 0px rgba(15, 22, 53, 0.05)',
+            borderRadius: '4px',
+            padding: '1.2rem',
+            zIndex: 10,
+            fontFamily: 'Georgia, serif',
+            fontSize: '0.85rem',
+            color: '#2b2a26',
+            pointerEvents: 'auto',
+            cursor: 'grab'
+          }}>
+            {/* Virtual paperclip */}
+            <div style={{
+              position: 'absolute',
+              top: '-10px',
+              left: '20px',
+              width: '14px',
+              height: '35px',
+              border: '2.5px solid #a3a199',
+              borderRadius: '10px',
+              background: 'transparent',
+              transform: 'rotate(-10deg)',
+              boxShadow: 'inset 1px 1px 0px rgba(255,255,255,0.8)'
+            }} />
+            <p style={{ margin: 0, fontStyle: 'italic', lineHeight: 1.4 }}>
+              "Helping everyday professionals build the leadership, skills, and networks they need to succeed on the global stage."
+            </p>
+            <span style={{ display: 'block', marginTop: '0.5rem', fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '1px', fontWeight: 700, color: 'var(--accent-gold)' }}>
+              — Our Mission
+            </span>
+          </div>
+
           <motion.div 
             initial="hidden"
             whileInView="visible"
