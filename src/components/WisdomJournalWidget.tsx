@@ -121,9 +121,6 @@ export default function WisdomJournalWidget() {
             onClick={() => setIsOpen(true)}
             title="Open Journal of Wisdom 📖"
             style={{
-              position: "fixed",
-              bottom: "2.5rem",
-              right: "2.5rem",
               width: "60px",
               height: "60px",
               borderRadius: "50%",
@@ -172,10 +169,6 @@ export default function WisdomJournalWidget() {
             exit={{ scale: 0.85, opacity: 0, y: 100, rotate: -2 }}
             transition={{ type: "spring", damping: 25, stiffness: 180 }}
             style={{
-              position: "fixed",
-              bottom: "3rem",
-              right: "3rem",
-              width: "360px",
               background: "#12182c", /* Deep modern navy case */
               borderRadius: "16px",
               border: "1px solid rgba(224, 169, 36, 0.4)",
@@ -298,6 +291,29 @@ export default function WisdomJournalWidget() {
 
       {/* Embedded Styles */}
       <style jsx global>{`
+        .wisdom-trigger-btn {
+          position: fixed;
+          bottom: 2.5rem;
+          right: 2.5rem;
+        }
+        .wisdom-journal-overlay {
+          position: fixed;
+          bottom: 3rem;
+          right: 3rem;
+          width: 360px;
+        }
+        @media (max-width: 480px) {
+          .wisdom-trigger-btn {
+            bottom: 1.25rem !important;
+            right: 1.25rem !important;
+          }
+          .wisdom-journal-overlay {
+            bottom: 1.5rem !important;
+            right: 1rem !important;
+            left: 1rem !important;
+            width: auto !important;
+          }
+        }
         .typewriter-cursor {
           animation: blink 0.7s infinite alternate;
           color: var(--accent-gold);

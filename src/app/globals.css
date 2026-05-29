@@ -246,9 +246,13 @@ img, video {
 
 /* Ancient Library background responsiveness */
 @media (max-width: 768px) {
+  .ancient-arch {
+    opacity: 0.15 !important; /* Make architectural arch design visible on mobile */
+  }
   .ancient-column-left,
   .ancient-column-right {
-    display: none !important;
+    opacity: 0.12 !important; /* Make classical fluted columns visible on mobile sides */
+    width: 14% !important;
   }
 }
 
@@ -339,7 +343,7 @@ img, video {
 
 @media (max-width: 768px) {
   .library-watermark-wrapper {
-    opacity: 0.035 !important; /* Soften further on mobile for absolute copy legibility */
+    opacity: 0.085 !important; /* Raised mobile opacity to make portraits beautiful and visible */
   }
   .watermark-pos-left-top { width: 110px; left: 1%; top: 8%; }
   .watermark-pos-right-top { width: 110px; right: 1%; top: 22%; }
